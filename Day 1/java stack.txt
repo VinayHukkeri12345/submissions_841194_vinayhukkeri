@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNextLine()) {
+            Stack<Character> stack = new Stack<>();
+            String line = scanner.nextLine();
+            for(char a : line.toCharArray()) {
+                if(a=='{' || a=='(' || a=='[') {
+                   stack.push(a);
+                   continue;
+                }                    
+                
+                if(a=='}' && !stack.isEmpty() && stack.peek()=='{') {
+                    stack.pop();
+                    continue;
+                }
+                
+                if(a==')' && !stack.isEmpty() && stack.peek()=='('){
+                    stack.pop();
+                    continue;
+                }
+                
+                if(a==']' && !stack.isEmpty() && stack.peek()=='['){
+                    stack.pop();
+                    continue;
+                }
+                
+                if(a=='}' || a==')' || a==']') {
+                    stack.push(a);
+                    break;
+                }   
+            }
+            System.out.println(stack.isEmpty());
+        }
+    }
+}
